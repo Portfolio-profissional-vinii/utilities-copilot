@@ -1,0 +1,14 @@
+# Etapa 5 — docker-compose.yml
+#
+# Responsabilidade deste arquivo:
+# - Orquestrar o serviço da aplicação (Streamlit)
+# - Se o vector store rodar como serviço separado (ex: Qdrant), orquestrar
+#   também esse serviço e a rede entre eles
+# - Definir volumes para persistir dados entre reinícios
+#
+# Ver docker/README.md para as perguntas-guia antes de implementar.
+#
+# TODO:
+# - [ ] Serviço da aplicação (build a partir do Dockerfile, porta exposta)
+# - [ ] Serviço do vector store, se aplicável (imagem oficial + volume)
+# - [ ] Variáveis de ambiente (via .env)

@@ -1,0 +1,20 @@
+# Core IA e Agentes
+langchain
+langchain-community
+langgraph
+
+# Extração de Dados e PDFs
+pymupdf
+tiktoken
+pandas
+pyarrow
+
+# Bancos Vetoriais e Modelos Locais (Suporte GPU)
+qdrant-client
+sentence-transformers
+torch
+torchvision
+torchaudio
+
+# Interface Visual
+streamlit
