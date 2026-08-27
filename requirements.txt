@@ -1,6 +1,10 @@
 # Core IA e Agentes
 langchain
 langchain-community
+langchain-google-genai
+langchain-huggingface
+langchain-qdrant
+langchain-text-splitters
 langgraph
 
 # Extração de Dados e PDFs
@@ -9,12 +13,17 @@ tiktoken
 pandas
 pyarrow
 
-# Bancos Vetoriais e Modelos Locais (Suporte GPU)
+# Bancos Vetoriais e Busca Híbrida
 qdrant-client
 sentence-transformers
+rank-bm25
+scikit-learn
 torch
 torchvision
 torchaudio
+
+# Utilitários
+python-dotenv
 
 # Interface Visual
 streamlit

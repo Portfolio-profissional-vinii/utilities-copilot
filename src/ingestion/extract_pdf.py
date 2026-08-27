@@ -4,10 +4,18 @@ import os
 import json
 from pathlib import Path
 
-def limpar_texto(texto_bruto):
-    texto_limpo = texto_bruto.replace('\n', ' ')
-    texto_limpo = re.sub(r'\s+', ' ', texto_limpo)
-    return texto_limpo.strip()
+def limpar_texto(texto_bruto: str) -> str:
+    """
+    Preserva a estrutura de parágrafos para que o chunker possa usar
+    quebras duplas de linha como fronteiras naturais entre seções normativas.
+    Remove apenas espaços excessivos dentro de cada linha.
+    """
+    # Normaliza múltiplas linhas em branco para separador de parágrafo duplo
+    texto = re.sub(r'\n{3,}', '\n\n', texto_bruto)
+    # Remove espaços e tabs excessivos dentro de cada linha (sem apagar newlines)
+    linhas = [re.sub(r'[ \t]{2,}', ' ', linha).strip() for linha in texto.split('\n')]
+    resultado = '\n'.join(linhas)
+    return resultado.strip()
 
 def extrair_pdf(caminho_pdf):
     print(f"Iniciando extração do arquivo: {caminho_pdf}")
