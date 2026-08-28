@@ -1,7 +1,13 @@
-data/raw/
-data/processed/
+.env
+*.env
 .venv/
+venv/
+env/
 __pycache__/
 *.pyc
-.env
 .pytest_cache/
+data/processed/
+data/raw/
+qdrant_storage/
+.vscode/
+.DS_Store

@@ -1,16 +1,22 @@
-# Etapa 5 — Dockerfile do app
-#
-# Responsabilidade deste arquivo:
-# - Definir a imagem base Python
-# - Instalar as dependências do requirements.txt
-# - Copiar o código do projeto
-# - Definir o comando de execução do Streamlit
-#
-# Ver docker/README.md para as perguntas-guia antes de implementar.
-#
-# TODO:
-# - [ ] FROM (imagem base)
-# - [ ] WORKDIR
-# - [ ] COPY requirements.txt + RUN pip install
-# - [ ] COPY do restante do código
-# - [ ] CMD/ENTRYPOINT rodando o streamlit
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Instala dependências de sistema necessárias
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copia e instala as dependências do Python
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia o restante dos arquivos da aplicação
+COPY . .
+
+# Expõe a porta padrão do Streamlit
+EXPOSE 8501
+
+# Comando de inicialização do container
+CMD ["streamlit", "run", "src/app/app.py", "--server.port=8501", "--server.address=0.0.0.0"]

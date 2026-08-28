@@ -1,14 +1,30 @@
-# Etapa 5 — docker-compose.yml
-#
-# Responsabilidade deste arquivo:
-# - Orquestrar o serviço da aplicação (Streamlit)
-# - Se o vector store rodar como serviço separado (ex: Qdrant), orquestrar
-#   também esse serviço e a rede entre eles
-# - Definir volumes para persistir dados entre reinícios
-#
-# Ver docker/README.md para as perguntas-guia antes de implementar.
-#
-# TODO:
-# - [ ] Serviço da aplicação (build a partir do Dockerfile, porta exposta)
-# - [ ] Serviço do vector store, se aplicável (imagem oficial + volume)
-# - [ ] Variáveis de ambiente (via .env)
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant_copilot
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    restart: always
+
+  copilot-app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: utiliti_copilot_app
+    ports:
+      - "8501:8501"
+    env_file:
+      - ../.env
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+    depends_on:
+      - qdrant
+    volumes:
+      - ../data:/app/data
+    restart: always
+
+volumes:
+  qdrant_storage:
