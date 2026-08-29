@@ -296,9 +296,3 @@ Este projeto está licenciado sob a **[MIT License](https://opensource.org/licen
 Foi desenvolvido para fins de **aprendizado e portfólio**, sendo livre para uso, cópia, modificação e estudo, desde que mantidos os devidos créditos.
 
 > **Nota sobre os dados utilizados:** os dados de indicadores de continuidade e os módulos normativos do PRODIST utilizados neste projeto são **dados públicos**, disponibilizados pela [ANEEL](https://www.gov.br/aneel/) sob a Lei de Acesso à Informação (Lei nº 12.527/2011). Esses dados **não são cobertos pela licença MIT do código** — pertencem à ANEEL e devem ser citados como fonte em qualquer uso derivado.
-
----
-
-## 👤 Autor
-
-Projeto desenvolvido para consultoria em **Utilities** (energia, saneamento e gás) — **Total Utiliti**.
