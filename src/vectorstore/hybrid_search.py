@@ -25,7 +25,7 @@ import pickle
 import re
 from pathlib import Path
 from typing import Any, List
-
+import os
 import torch
 from langchain_core.callbacks import CallbackManagerForRetrieverRun
 from langchain_core.documents import Document
@@ -196,7 +196,9 @@ def configurar_buscador(k_resultados: int = 5, k_candidatos: int = 20) -> Hybrid
     with open(caminho_bm25, "rb") as f:
         bm25 = pickle.load(f)
 
-    cliente = QdrantClient(path=str(pasta_qdrant))
+    cliente = QdrantClient(
+    url=os.getenv("QDRANT_URL", "http://localhost:6333")
+    )
 
     # Carregar corpus para montar Documents a partir dos IDs retornados pelo RRF
     corpus_texts, corpus_metadados = _carregar_corpus(pasta_processados)

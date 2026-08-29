@@ -94,7 +94,7 @@ if __name__ == "__main__":
         print(f"  Embeddings gerados: {len(dense_vectors)} x {dim} dims.")
 
         # ── Qdrant — recriar coleção SOMENTE DENSE ───────────────────────────────
-        print("\nRecriando colecao no Qdrant (limpando diretorio)...")
+        print("\nRecriando coleção no Qdrant (limpando diretorio)...")
         import shutil
         # Força a limpeza física do Qdrant local para evitar ghost points
         if pasta_qdrant.exists():
@@ -113,7 +113,7 @@ if __name__ == "__main__":
         try:
             try:
                 cliente.delete_collection("prodist_normativas")
-                print("  Colecao antiga removida via API.")
+                print("  Coleção antiga removida via API.")
             except Exception:
                 pass
 
@@ -122,7 +122,7 @@ if __name__ == "__main__":
                 collection_name="prodist_normativas",
                 vectors_config=VectorParams(size=dim, distance=Distance.COSINE),
             )
-            print(f"  Colecao criada: vetores densos ({dim}d, Cosine).")
+            print(f"  Coleção criada: vetores densos ({dim}d, Cosine).")
     
             # ── Upsert em lotes ──────────────────────────────────────────────────
             # IDs são inteiros sequenciais: id=i corresponde ao chunk i do corpus.
@@ -151,7 +151,7 @@ if __name__ == "__main__":
                 )
 
             info = cliente.get_collection("prodist_normativas")
-            print(f"\nColecao pronta: {info.points_count} pontos indexados.")
+            print(f"\nColeção pronta: {info.points_count} pontos indexados.")
             print("Todos os documentos foram vetorizados e o Banco Vetorial esta pronto!")
         finally:
             cliente.close()  # evita o warning QdrantClient.__del__
