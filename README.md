@@ -1,8 +1,17 @@
 # Utilities Regulatory Copilot
 
-Copiloto de IA para o setor de **Utilities** (energia, saneamento e gás), que une **busca semântica avançada em normativas regulatórias (PRODIST/ANEEL)** com **consultas em linguagem natural sobre dados operacionais estruturados**, usando uma arquitetura **RAG híbrido + multi-agente**.
+Copiloto de IA especializado no setor elétrico, desenvolvido para auxiliar na consulta e análise de normativas regulatórias da ANEEL, como o PRODIST e a REN ANEEL nº 1.000/2021, combinando RAG híbrido + re-ranking + arquitetura multi-agente.
 
-O sistema responde tanto perguntas do tipo *"O que diz o PRODIST sobre ressarcimento de danos elétricos?"* quanto *"Qual foi o valor médio do indicador DEC em 2020?"*, roteando automaticamente cada pergunta para o agente especializado correto.
+O sistema permite consultar as normas em linguagem natural, encontrando informações relevantes em documentos regulatórios extensos, além de realizar consultas sobre dados operacionais estruturados. Um agente roteador identifica automaticamente o tipo de solicitação e direciona a pergunta para o agente especializado.
+
+Por exemplo:
+
+"O que é o indicador DIC?"
+"Quando a distribuidora deve compensar o consumidor por violação do DIC?"
+"Quais são os limites para compensação por violação dos indicadores de continuidade?"
+"Qual foi o valor médio do indicador DEC em 2020?"
+
+A arquitetura combina busca semântica (Dense Retrieval), busca lexical com BM25, Hybrid Search com RRF, re-ranking, Qdrant, LangGraph e Google Gemini, permitindo respostas fundamentadas no contexto recuperado e com referência à normativa, módulo e página.
 
 <img width="1280" height="720" alt="demo" src="https://github.com/user-attachments/assets/baec3fcd-cc64-412b-80ca-ed4884c8a32f" />
 
