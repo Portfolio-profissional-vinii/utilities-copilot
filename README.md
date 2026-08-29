@@ -22,10 +22,9 @@ Um **agente roteador** (LLM com temperatura 0) classifica a intenção da pergun
 
 ## Arquitetura
 
-```
-<img width="2720" height="1696" alt="arquitetura_utilities_copilot" src="https://github.com/user-attachments/assets/e471752b-9cb7-46a0-a9c5-edd44ba20327" />
-
-```
+<p align="center">
+  <img src="[https://github.com/user-attachments/assets/e471752b-9cb7-46a0-a9c5-edd44ba20327](https://github.com/user-attachments/assets/e471752b-9cb7-46a0-a9c5-edd44ba20327)" alt="Arquitetura Utilities Copilot" width="100%">
+</p>
 
 ### Busca Híbrida (RAG)
 
