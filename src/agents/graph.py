@@ -12,7 +12,8 @@ ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(ROOT_DIR))
 load_dotenv(ROOT_DIR / ".env")
 
-from src.agents.regulatory_agent import iniciar_copilot
+# DEPOIS
+from src.agents.rag_agent import iniciar_copilot
 from src.agents.operations_agent import consultar_dados_operacionais
 
 class CopilotOrchestrator:

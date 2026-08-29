@@ -109,7 +109,7 @@ if __name__ == "__main__":
         with open(caminho_bm25, "wb") as f:
             pickle.dump(bm25, f)
             
-        cliente = QdrantClient(path=str(pasta_qdrant))
+        cliente = QdrantClient(url=os.getenv("QDRANT_URL", "http://localhost:6333"))
         try:
             try:
                 cliente.delete_collection("prodist_normativas")
@@ -123,7 +123,7 @@ if __name__ == "__main__":
                 vectors_config=VectorParams(size=dim, distance=Distance.COSINE),
             )
             print(f"  Colecao criada: vetores densos ({dim}d, Cosine).")
-
+    
             # ── Upsert em lotes ──────────────────────────────────────────────────
             # IDs são inteiros sequenciais: id=i corresponde ao chunk i do corpus.
             # Isso permite que o hybrid_search.py use o ID do ponto Qdrant como

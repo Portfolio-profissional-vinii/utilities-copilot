@@ -2,8 +2,8 @@ import os
 import sys
 from pathlib import Path
 from dotenv import load_dotenv
-
-from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_qdrant import QdrantVectorStore
 from qdrant_client import QdrantClient
 from langchain_core.prompts import ChatPromptTemplate
@@ -20,14 +20,26 @@ COLLECTION_NAME = "prodist_normativas"
 
 def formatar_docs(docs):
     texto_formatado = []
-    for doc in docs:
-        fonte = doc.metadata.get("source", "PRODIST")
-        pagina = doc.metadata.get("page", "N/A")
-        texto_formatado.append(f"--- Documento: {fonte} (Página {pagina}) ---\n{doc.page_content}")
+
+    for i, doc in enumerate(docs, 1):
+        documento = doc.metadata.get("documentos", "Documento não identificado")
+        modulo = doc.metadata.get("modulo", "Módulo não identificado")
+        pagina = doc.metadata.get("pagina", "Página não identificada")
+
+        texto_formatado.append(
+            f"--- FONTE {i} ---\n"
+            f"Documento: {documento}\n"
+            f"Módulo: {modulo}\n"
+            f"Página: {pagina}\n"
+            f"Texto:\n{doc.page_content}"
+        )
+
     return "\n\n".join(texto_formatado)
 
 def iniciar_copilot():
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
+    embeddings = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+)
     client = QdrantClient(url=QDRANT_URL)
     
     vector_store = QdrantVectorStore(
@@ -45,12 +57,23 @@ def iniciar_copilot():
     llm = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
     system_prompt = (
-        "Você é o Copilot Regulatório da Total Utiliti, especialista em normas da ANEEL e PRODIST.\n"
-        "Responda à dúvida do usuário com base EXCLUSIVAMENTE no contexto fornecido.\n"
-        "Se a informação não estiver no contexto, responda que não encontrou essa informação nas normativas fornecidas.\n"
-        "Sempre cite a fonte (Módulo e Página) ao final de cada ponto explicado.\n\n"
-        "Contexto:\n{context}"
-    )
+    "Você é o Copilot Regulatório da Total Utiliti, especialista em normas da ANEEL e PRODIST.\n\n"
+
+    "Responda à dúvida do usuário EXCLUSIVAMENTE com base no contexto fornecido.\n\n"
+
+    "REGRAS OBRIGATÓRIAS:\n"
+    "1. Não invente informações, valores, artigos, módulos ou páginas.\n"
+    "2. Cada informação apresentada deve ser fundamentada em uma fonte do contexto.\n"
+    "3. Cite a fonte no formato [Módulo X, Página Y].\n"
+    "4. Use exatamente o módulo e a página informados na fonte correspondente.\n"
+    "5. Se a página não estiver disponível, use [Página não identificada].\n"
+    "6. Nunca escreva 'Página N/A' se a página estiver disponível no contexto.\n"
+    "7. Não crie links, HTML, SVG ou referências como [svg](...).\n"
+    "8. Se a informação não estiver no contexto, diga que não encontrou essa informação "
+    "nas normativas fornecidas.\n\n"
+
+    "Contexto:\n{context}"
+)
 
     prompt = ChatPromptTemplate.from_messages([
         ("system", system_prompt),

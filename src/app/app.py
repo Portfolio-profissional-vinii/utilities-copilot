@@ -54,7 +54,7 @@ with tab_chat:
 
         with st.chat_message("assistant"):
             with st.spinner("Analisando solicitação..."):
-                resposta = orchestrator.processar_pergunta(prompt)
+                resposta = orchestrator.responder(prompt)
                 st.markdown(resposta)
                 st.session_state.messages.append({"role": "assistant", "content": resposta})
 
