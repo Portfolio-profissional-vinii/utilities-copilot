@@ -23,29 +23,8 @@ Um **agente roteador** (LLM com temperatura 0) classifica a intenção da pergun
 ## Arquitetura
 
 ```
-                         ┌─────────────────────────┐
-                         │   Streamlit (app.py)    │
-                         │  Chat + Dashboard Tabs   │
-                         └────────────┬─────────────┘
-                                      │
-                         ┌────────────▼─────────────┐
-                         │   CopilotOrchestrator     │
-                         │   (graph.py — Roteador)   │
-                         └──────┬─────────────┬──────┘
-                    OPERACIONAL │             │ REGULATORIO
-                                ▼             ▼
-                ┌───────────────────┐   ┌──────────────────────┐
-                │ operations_agent   │   │  regulatory_agent     │
-                │ (Text-to-SQL)      │   │  (RAG Híbrido)        │
-                └─────────┬──────────┘   └──────────┬────────────┘
-                          │                          │
-                          ▼                          ▼
-                ┌───────────────────┐   ┌──────────────────────┐
-                │  DuckDB + Parquet  │   │  Qdrant (Dense) +     │
-                │  (indicadores ANEEL│   │  BM25 (Lexical) → RRF │
-                │   de continuidade) │   │  → Cross-Encoder      │
-                └────────────────────┘   │     Reranker          │
-                                          └──────────────────────┘
+<img width="2720" height="1696" alt="arquitetura_utilities_copilot" src="https://github.com/user-attachments/assets/e471752b-9cb7-46a0-a9c5-edd44ba20327" />
+
 ```
 
 ### Busca Híbrida (RAG)
