@@ -7,8 +7,11 @@ O sistema permite consultar as normas em linguagem natural, encontrando informa�
 Por exemplo:
 
 • "O que é o indicador DIC?"
+
 • "Quando a distribuidora deve compensar o consumidor por violação do DIC?"
+
 • "Quais são os limites para compensação por violação dos indicadores de continuidade?"
+
 • "Qual foi o valor médio do indicador DEC em 2020?"
 
 A arquitetura combina **busca semântica (Dense Retrieval), busca lexical com BM25, Hybrid Search com RRF, re-ranking, Qdrant, LangGraph e Google Gemini**, permitindo respostas fundamentadas no contexto recuperado e com referência à normativa, módulo e página.
