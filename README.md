@@ -4,6 +4,9 @@ Copiloto de IA para o setor de **Utilities** (energia, saneamento e gás), que u
 
 O sistema responde tanto perguntas do tipo *"O que diz o PRODIST sobre ressarcimento de danos elétricos?"* quanto *"Qual foi o valor médio do indicador DEC em 2020?"*, roteando automaticamente cada pergunta para o agente especializado correto.
 
+<img width="1280" height="720" alt="demo" src="https://github.com/user-attachments/assets/baec3fcd-cc64-412b-80ca-ed4884c8a32f" />
+
+
 ---
 
 ## Visão Geral
@@ -162,7 +165,7 @@ utilities-copilot/
 ## ✅ Pré-requisitos
 
 - Python 3.11+
-- [Docker](https://www.docker.com/) e Docker Compose (opcional, mas recomendado)
+- [Docker](https://www.docker.com/) e Docker Compose (obrigatório)
 - Uma **API Key do Google Gemini** (obtida gratuitamente em [aistudio.google.com](https://aistudio.google.com/))
 - (Opcional) GPU com CUDA para acelerar a geração de embeddings
 
