@@ -36,7 +36,7 @@ if user_api_key:
     st.session_state.google_api_key = user_api_key
     os.environ["GOOGLE_API_KEY"] = user_api_key
 
-st.title("⚡ Utilities Copilot - Total Utiliti")
+st.title("⚡ Utilities Copilot")
 
 tab_chat, tab_dash = st.tabs(
     [

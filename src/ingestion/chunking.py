@@ -17,10 +17,15 @@ def salvar_chunks(chunks: list, caminho_saida: str) -> None:
 
 
 def extrair_modulo(nome_documento: str) -> str:
-    """Extrai o número do módulo PRODIST a partir do nome do arquivo."""
     match = re.search(r'modulo[_\s]?(\d+)', nome_documento, re.IGNORECASE)
-    return f"Módulo {match.group(1)}" if match else nome_documento
+    if match:
+        return f"Módulo {match.group(1)}"
 
+    if re.search(r'resolucao[-_]normativa[-_]?1000', nome_documento, re.IGNORECASE):
+        return "REN 1000/2021"
+
+    print(f"AVISO: não foi possível extrair módulo de '{nome_documento}' — usando nome bruto.")
+    return nome_documento
 
 def processar_fatiamento(caminho_entrada: str, caminho_saida: str, nome_documento: str) -> None:
     dados_paginas = carregar_json(caminho_entrada)
@@ -66,7 +71,6 @@ def processar_fatiamento(caminho_entrada: str, caminho_saida: str, nome_document
                     }
                 })
 
-    # CORRIGIDO: salvar_chunks FORA do loop de páginas (era chamado a cada página)
     salvar_chunks(chunks_finais, caminho_saida)
     print(f"{nome_documento}: Gerados {len(chunks_finais)} chunks de {len(dados_paginas)} páginas.")
 
