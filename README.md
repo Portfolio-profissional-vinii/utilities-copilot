@@ -16,9 +16,6 @@ Por exemplo:
 
 A arquitetura combina **busca semântica (Dense Retrieval), busca lexical com BM25, Hybrid Search com RRF, re-ranking, Qdrant, LangGraph e Google Gemini**, permitindo respostas fundamentadas no contexto recuperado e com referência à normativa, módulo e página.
 
-<img width="1280" height="720" alt="demo" src="https://github.com/user-attachments/assets/baec3fcd-cc64-412b-80ca-ed4884c8a32f" />
-
-
 ---
 
 ## Visão Geral
