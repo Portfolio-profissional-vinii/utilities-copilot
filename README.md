@@ -161,7 +161,7 @@ utilities-copilot/
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/utilities-copilot.git
+git clone https://github.com/Portfolio-profissional-vinii/utilities-copilot
 cd utilities-copilot
 ```
 
